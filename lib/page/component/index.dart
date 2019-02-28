@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:efox_flutter/router/index.dart';
 import 'package:efox_flutter/store/models/main_state_model.dart';
 import 'package:efox_flutter/widget/index.dart' as WidgetRoot;
+import 'package:efox_flutter/config/theme.dart' show AppTheme;
 
 class Index extends StatefulWidget {
   final MainStateModel model;
@@ -29,70 +30,73 @@ class _IndexState extends State<Index> {
   Widget renderExpanel(MainStateModel model, widgetsItem) {
     String nameSpaces = widgetsItem.nameSpaces;
     List _tmpWidgetList = widgetsItem.widgetList;
-    return ExpansionTile(
-      title: Text(
-        widgetsItem.typeName,
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      leading: Icon(
-        IconData(
-          widgetsItem.code ?? 58353,
-          fontFamily: 'MaterialIcons',
-          matchTextDirection: true,
-        ),
-        // color: Color(model.theme.mainColor),
-      ),
-      backgroundColor: Colors.white,
-      children: [
-        GridView.count(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          childAspectRatio: 1,
-          crossAxisCount: 3,
-          children: List.generate(
-            _tmpWidgetList.length,
-            (index) {
-              return Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      width: .1,
-                    ),
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      iconSize: 48,
-                      icon: Icon(
-                        IconData(
-                          _tmpWidgetList[index].code ?? 59101,
-                          fontFamily: 'MaterialIcons',
-                          matchTextDirection: true,
-                        ),
-                        color: Color(model.theme.mainColor),
-                      ),
-                      onPressed: () {
-                        FluroRouter.router.navigateTo(
-                          context,
-                          nameSpaces + _tmpWidgetList[index].title,
-                        );
-                      },
-                    ),
-                    Text(
-                      _tmpWidgetList[index].title,
-                    ),
-                  ],
-                ),
-              );
-            },
+    return Container(
+      child: ExpansionTile(
+        title: Text(
+          widgetsItem.typeName,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
         ),
-      ],
+        leading: Icon(
+          IconData(
+            widgetsItem.code ?? 58353,
+            fontFamily: 'MaterialIcons',
+            matchTextDirection: true,
+          ),
+          // color: Color(AppTheme.mainColor),
+        ),
+        backgroundColor: Colors.white,
+        children: [
+          GridView.count(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            childAspectRatio: 1,
+            crossAxisCount: 3,
+            children: List.generate(
+              _tmpWidgetList.length,
+              (index) {
+                return Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: .1,
+                      ),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        iconSize: 48,
+                        icon: Icon(
+                          IconData(
+                            _tmpWidgetList[index].code ?? 59101,
+                            fontFamily: 'MaterialIcons',
+                            matchTextDirection: true,
+                          ),
+                          color: Color(AppTheme.iconColor),
+                        ),
+                        onPressed: () {
+                          FluroRouter.router.navigateTo(
+                            context,
+                            nameSpaces + _tmpWidgetList[index].title,
+                          );
+                        },
+                      ),
+                      Text(
+                        _tmpWidgetList[index].title,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      margin: EdgeInsets.only(bottom: 10),
     );
   }
 

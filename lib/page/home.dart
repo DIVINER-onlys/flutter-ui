@@ -7,6 +7,7 @@ import 'package:efox_flutter/store/store.dart' show Store, MainStateModel;
 import 'package:efox_flutter/components/header.dart' as Header;
 import 'component/index.dart' as TabIndex;
 import 'mine/index.dart' as MyIndex;
+import 'package:efox_flutter/config/theme.dart' show AppTheme;
 
 class Index extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
         border: Border(
           top: BorderSide(
             width: .1,
-            color: Color(model.theme.greyColor),
+            color: Color(AppTheme.greyColor),
           ),
         ),
       ),
@@ -34,32 +35,32 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
           border: Border(
             bottom: BorderSide(
               width: .2,
-              color: Color(model.theme.mainColor),
+              color: Color(AppTheme.mainColor),
             ),
           ),
         ),
-        labelColor: Color(model.theme.mainColor),
-        unselectedLabelColor: Color(model.theme.greyColor),
+        labelColor: Color(AppTheme.iconColor),
+        unselectedLabelColor: Color(AppTheme.greyColor),
         indicatorSize: TabBarIndicatorSize.tab,
-        indicatorColor: Color(model.theme.secondColor),
+        indicatorColor: Color(AppTheme.secondColor),
         labelStyle: TextStyle(
-          color: Colors.green,
-          fontWeight: FontWeight.w700,
-          fontSize: 16,
+          //color: Colors.green,
+          fontWeight: FontWeight.w500,
+          fontSize: 12,
         ),
         tabs: [
           Tab(
             text: AppTranslations.of(context).t('title_component'),
             icon: Icon(
               Icons.dashboard,
-              size: 28,
+              size: 24,
             ),
           ),
           Tab(
             text: AppTranslations.of(context).t('title_my'),
             icon: Icon(
               Icons.person_outline,
-              size: 28,
+              size: 24,
             ),
           ),
         ],
@@ -72,7 +73,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
       PopupMenuButton(
         icon: Icon(
           Icons.more_vert,
-          // color: Color(model.theme.textColor),
+          // color: Color(AppTheme.textColor),
         ),
         onSelected: (local) {
           Application().onLocaleChanged(Locale(local));
